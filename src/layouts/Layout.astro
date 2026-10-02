@@ -32,6 +32,18 @@ const { title = 'Deysi & Jimmy | Nuestra Boda', description = "Invitación de Bo
 			content={Astro.generator}
 		/>
 		<title>{title}</title>
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://res.cloudinary.com/dszdzhmqx/image/upload/v1790914100/hero-main-cell_ypjm4x.jpg" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://res.cloudinary.com/dszdzhmqx/image/upload/v1790914100/hero-main-cell_ypjm4x.jpg" />
 
 		<link
 			rel='preload'
