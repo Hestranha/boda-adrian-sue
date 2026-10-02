@@ -125,7 +125,7 @@ export default function AssistanceForm({ asistencia, mensajeAsistencia, pases }:
 
 			{enviado ? (
 				<div className='flex flex-col items-center gap-3 text-center animate-fade-in'>
-					<h2 className='font-display text-2xl lg:text-4xl text-primary font-semibold tracking-wide mt-2'>¡Gracias!</h2>
+					<h2 className='font-display text-2xl lg:text-4xl text-primary font-semibold tracking-wide mt-2'>¡Gracias por confirmar!</h2>
 					<img
 						className='w-full h-20 lg:h-24'
 						src='/icons/assistance/confirmation.svg'
