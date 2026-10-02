@@ -13,8 +13,8 @@ export const EVENT_DATA = {
 	frase: "Con Dios como guía y el amor como camino, comenzamos una nueva historia",
 
 	opacity: "flex w-full h-full bg-primary/30 absolute",
-	imagenes: ["/images/gallery/moment-1.jpeg", "/images/gallery/moment-2.jpeg", "/images/gallery/moment-3.jpeg", "/images/gallery/moment-4.jpeg", "/images/gallery/moment-5.jpeg"],
-	imagenPortada: "/backgrounds/hero-main-cell.jpeg",
+	imagenes: ["/images/gallery/moment-1.jpg", "/images/gallery/moment-2.jpg", "/images/gallery/moment-3.jpg", "/images/gallery/moment-4.jpg", "/images/gallery/moment-5.jpg"],
+	imagenPortada: "/backgrounds/hero-main-cell.jpg",
 	padresNovia: ["Edward Torres Cahuana", "Betty Kioko López Tang"],
 	padresNovio: ["Hermes Pasapera Flores", "Dalila Pérez Agip"],
 	padrinos: [
@@ -34,7 +34,7 @@ export const EVENT_DATA = {
 		nombre: "Las Palmeras Garden",
 		direccion: "Av Capanique S/N Pocollay (frente a Bodegas Franco)",
 		mapaHref: "https://maps.app.goo.gl/GJdveHg9Lx3mTzik6",
-		imagen: ["/images/reception/ref-1.jpeg", "/images/reception/ref-2.png"],
+		imagen: ["/images/reception/ref-1.jpg", "/images/reception/ref-2.png"],
 	},
 	scheduleEvents: [
 		{ hora: "11:00am", titulo: "Ceremonia Religiosa", icono: "/icons/schedule/church.svg", alt: "iglesia", side: "left" as const, textWidth: "w-30" },
