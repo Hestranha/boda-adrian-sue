@@ -25,7 +25,7 @@ export const EVENT_DATA = {
 	ceremonia: {
 		hora: "11:00am",
 		nombre: "Parroquia Señor de los Milagros",
-		direccion: "Av. Jorge Chavez",
+		direccion: "Av. Jorge Chavez 2255 Urbanizacion bolognesi",
 		mapaHref: "https://maps.app.goo.gl/Gnba8LojkC4Zkqqr8",
 		imagen: ["/images/ceremony/ref-1.jpg", "/images/ceremony/ref-2.jpg"],
 	},
