@@ -1,0 +1,83 @@
+---
+import Column from "../components/Column.astro";
+
+interface Event {
+	hora: string;
+	titulo: string;
+	icono: string;
+	alt: string;
+	side: "left" | "right";
+	textWidth?: string;
+}
+
+interface Props {
+	events: Event[];
+}
+
+const { events } = Astro.props;
+---
+
+<Column
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+	class='max-lg:bg-[url(/backgrounds/gift-mobile.webp),url(/backgrounds/assistance-mobile.webp)] max-lg:bg-no-repeat max-lg:bg-size-[20rem,30rem] max-lg:bg-position-[right_top,left_bottom] relative bg-transparent font-primary py-12 gap-20 lg:gap-12'
+>
+	<p
+		data-sal='slide-up'
+		data-sal-duration='800'
+		class='font-display text-2xl lg:text-4xl text-primary font-semibold'
+	>
+		Itinerario
+	</p>
+
+	<div
+		data-sal='slide-up'
+		data-sal-duration='800'
+		class='flex flex-col lg:py-36 lg:flex-row relative justify-between max-lg:min-h-72 lg:h-auto lg:w-120 lg:items-center'
+	>
+		<div class='absolute top-0 left-1/2 -translate-x-1/2 h-full w-0.5 bg-[radial-gradient(circle,var(--color-primary)_1.2px,transparent_1.2px)] bg-size-[2px_8px] z-0 lg:hidden'></div>
+
+		<div class='absolute hidden lg:block top-1/2 left-0 -translate-y-1/2 w-full h-0.5 border-b-2 border-dotted border-primary z-0'></div>
+
+		{
+			events.map(({ hora, titulo, icono, alt, textWidth }, i) => {
+				const side = i % 2 === 0 ? "left" : "right";
+				return (
+					<div class='relative flex justify-center items-center'>
+						<div class='absolute left-1/2 lg:left-1/2 lg:top-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-3.25 h-3.25 lg:w-4 lg:h-4 bg-primary-neutral text-primary-neutral border-2 border-primary-neutral rounded-full z-10' />
+
+						{side === "left" ? (
+							<>
+								<div class='absolute flex flex-col gap-1 items-end text-right right-1/2 max-lg:mr-7.5 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:items-center lg:text-center'>
+									<img
+										class='self-end lg:self-center object-contain max-w-12.5 h-12.5 lg:mb-2'
+										src={icono}
+										alt={alt}
+									/>
+									<Column>
+										<p class='text-sm lg:text-base'>{hora}</p>
+										<p class={`text-sm lg:text-base ${textWidth || ""}`}>{titulo}</p>
+									</Column>
+								</div>
+							</>
+						) : (
+							<>
+								<div class='absolute flex flex-col gap-1 items-start text-left left-1/2 max-lg:ml-7.5 lg:absolute lg:top-6 lg:left-1/2 lg:-translate-x-1/2 lg:flex-col lg:items-center lg:text-center'>
+									<img
+										class='max-w-12.5 h-12.5 object-contain lg:mb-2'
+										src={icono}
+										alt={alt}
+									/>
+									<Column>
+										<p class='text-sm lg:text-base'>{hora}</p>
+										<p class={`text-sm lg:text-base ${textWidth || ""}`}>{titulo}</p>
+									</Column>
+								</div>
+							</>
+						)}
+					</div>
+				);
+			})
+		}
+	</div>
+</Column>

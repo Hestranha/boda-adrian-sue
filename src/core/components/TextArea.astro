@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"textarea"> {
+	class?: string;
+	isRequired?: boolean;
+}
+
+const { class: className, isRequired, ...rest } = Astro.props;
+---
+
+<textarea
+	class:list={[
+		"w-full h-28 resize-none border py-2 px-4 hover:bg-input-hover hover:border-input-border-focus text-sm rounded-md focus:outline-none focus:bg-input-bg placeholder-primary focus:border-input-border-focus bg-input-bg border-transparent transition-colors",
+		className,
+	]}
+	data-required={isRequired}
+	{...rest}
+></textarea>

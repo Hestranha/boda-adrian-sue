@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Cinzel Decorative";
+  src: url("/fonts/CinzelDecorative-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Riverflows";
+  src: url("/fonts/RIVERFLOWS.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-primary: #212121;
+  --color-primary-neutral: #454545;
+  --color-secondary: #C5D9AF;
+  --color-white: #ffffff;
+
+
+  /* Input Colors */
+  --color-input-hover: #ceefd5a6;
+  --color-input-border-focus: #5a8766a6;
+  --color-input-bg: #ceefd548;
+
+  /* Status Colors */
+  --color-status-error: #ff4040;
+  --color-status-error-bg: #ff404033;
+  --color-status-error-strong: #FF8A85a6;
+  --color-status-success: #22c55e;
+
+  /* Surfaces & Backgrounds */
+  --color-surface-green: #F4FFE8;
+  --color-brand-green: #b3c79e;
+  --color-text-inverted: #e8e8e8;
+
+
+  --font-primary: "Poppins", serif;
+  --font-decorative: "Riverflows", cursive;
+  --font-display: "Cinzel Decorative", serif;
+}

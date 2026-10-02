@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {
+	class?: string;
+	isRequired?: boolean;
+}
+
+const { class: className, isRequired, ...rest } = Astro.props;
+---
+
+<input
+	class:list={[
+		"w-full border py-1.5 px-4 hover:bg-input-hover hover:border-input-border-focus text-sm rounded-md focus:outline-none focus:bg-input-bg placeholder-primary focus:border-input-border-focus bg-input-bg border-transparent transition-colors",
+		className,
+	]}
+	data-required={isRequired}
+	{...rest}
+/>

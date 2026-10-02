@@ -1,0 +1,32 @@
+---
+import Column from "../components/Column.astro";
+
+interface Props {
+	titulo: string;
+	mensaje: string;
+}
+
+const { titulo, mensaje } = Astro.props;
+---
+
+<Column
+	crossAxisAlignment='center'
+	mainAxisAlignment='center'
+	class='py-7 gap-2 lg:gap-4 w-full text-center ] bg-no-repeat bg-cover max-lg:bg-top-left bg-[url(./backgrounds/clothing-desktop.webp)] bg-top-right'
+>
+	<h2
+		data-sal='slide-up'
+		data-sal-duration='800'
+		class='font-display text-2xl lg:text-4xl text-primary font-semibold'
+	>
+		{titulo}
+	</h2>
+
+	<p
+		data-sal='slide-up'
+		data-sal-duration='800'
+		class='font-primary text-sm lg:text-base text-primary-neutral w-[75%] leading-relaxed'
+	>
+		{mensaje}
+	</p>
+</Column>

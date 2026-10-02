@@ -1,0 +1,68 @@
+---
+interface Props {
+	id: string;
+	triggerId?: string;
+	class?: string;
+	open?: boolean;
+}
+
+const { id, triggerId, class: className = "" } = Astro.props;
+---
+
+<dialog
+	id={id}
+	data-trigger-id={triggerId}
+	class:list={[
+		"modal-component fixed inset-0 w-full h-full max-w-none max-h-none m-0 p-0 bg-transparent justify-center items-center z-50 backdrop-blur-xs font-primary border-none open:flex",
+		className,
+	]}
+>
+	<slot />
+</dialog>
+
+<script>
+	const initModals = () => {
+		const modals = document.querySelectorAll("dialog.modal-component");
+
+		modals.forEach((modal) => {
+			if (!(modal instanceof HTMLDialogElement)) return;
+
+			// Check if already initialized to prevent double binding
+			if (modal.dataset.initialized === "true") return;
+			modal.dataset.initialized = "true";
+
+			const triggerId = modal.dataset.triggerId;
+			const openBtn = triggerId ? document.getElementById(triggerId) : null;
+			const closeBtns = modal.querySelectorAll(".close-modal");
+
+			if (openBtn) {
+				openBtn.addEventListener("click", () => {
+					modal.showModal();
+				});
+			}
+
+			closeBtns.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					modal.close();
+				});
+			});
+
+			modal.addEventListener("click", (e) => {
+				const dialogDimensions = modal.getBoundingClientRect();
+				if (e.clientX < dialogDimensions.left || e.clientX > dialogDimensions.right || e.clientY < dialogDimensions.top || e.clientY > dialogDimensions.bottom) {
+					modal.close();
+				}
+			});
+		});
+	};
+
+	// Run on initial load
+	initModals();
+
+	// Support Astro View Transitions if used in the future
+	document.addEventListener("astro:after-swap", initModals);
+</script>
+
+<style>
+	@import "../../styles/modal.css";
+</style>

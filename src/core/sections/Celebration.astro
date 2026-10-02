@@ -1,0 +1,75 @@
+---
+import Column from "../components/Column.astro";
+import Row from "../components/Row.astro";
+
+import CelebrationCard from "../../components/CelebrationCard.astro";
+
+interface LocationInfo {
+	hora: string;
+	nombre: string;
+	direccion: string;
+	mapaHref: string;
+	imagen: string[];
+}
+
+interface Props {
+	ceremonia: LocationInfo;
+	recepcion: LocationInfo;
+}
+
+const { ceremonia, recepcion } = Astro.props;
+---
+
+<Column
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+	class='relative w-full py-12 bg-white bg-none lg:bg-[url("/backgrounds/celebration-desktop.webp")] lg:bg-cover lg:bg-top-right lg:bg-no-repeat gap-10 lg:gap-14'
+>
+	<h2
+		class='font-display text-4xl max-lg:hidden text-primary font-semibold'
+		data-sal='slide-up'
+		data-sal-duration='800'
+	>
+		¿Dónde y cuándo?
+	</h2>
+
+	<Row
+		mainAxisAlignment='center'
+		class='w-full lg:w-200 gap-10 max-lg:flex-col max-lg:items-center text-center lg:gap-16'
+	>
+		<Column
+			crossAxisAlignment='center'
+			class='max-lg:bg-[url("/backgrounds/celebration-mobile.webp")] max-lg:bg-cover max-lg:bg-top-right max-lg:bg-no-repeat w-full gap-7'
+		>
+			<h2
+				class='lg:hidden font-display text-2xl text-primary font-semibold'
+				data-sal='slide-up'
+				data-sal-duration='800'
+			>
+				¿Dónde y cuándo?
+			</h2>
+			<CelebrationCard
+				title='Ceremonia'
+				hora={ceremonia.hora}
+				nombre={ceremonia.nombre}
+				direccion={ceremonia.direccion}
+				mapaHref={ceremonia.mapaHref}
+				imagen={ceremonia.imagen}
+			/>
+		</Column>
+
+		<Column
+			crossAxisAlignment='center'
+			class='max-lg:bg-[url("/backgrounds/celebration-ceremony-mobile.webp")] max-lg:bg-cover max-lg:bg-top-left max-lg:bg-no-repeat w-full'
+		>
+			<CelebrationCard
+				title='Recepción'
+				hora={recepcion.hora}
+				nombre={recepcion.nombre}
+				direccion={recepcion.direccion}
+				mapaHref={recepcion.mapaHref}
+				imagen={recepcion.imagen}
+			/>
+		</Column>
+	</Row>
+</Column>

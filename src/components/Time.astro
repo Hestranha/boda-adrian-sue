@@ -1,0 +1,142 @@
+---
+import Column from '../core/components/Column.astro';
+import Row from '../core/components/Row.astro';
+
+interface Props {
+	fechaBoda: {
+		anioFinal: number;
+		mesFinal: number;
+		diaFinal: number;
+		zonaEvento: string;
+	};
+}
+
+const { fechaBoda } = Astro.props;
+const { anioFinal, mesFinal, diaFinal } = fechaBoda;
+---
+
+<Column
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+	class='w-full gap-3 lg:gap-4 time-counter'
+	data-sal='slide-up'
+	data-sal-duration='800'
+	data-anio={anioFinal}
+	data-mes={mesFinal}
+	data-dia={diaFinal}
+>
+	<Column
+		mainAxisAlignment='center'
+		crossAxisAlignment='center'
+		class='py-8 gap-2 lg:gap-5'
+	>
+		<span class='font-display text-3xl lg:text-4xl text-primary -mb-2 font-semibold'>faltan</span>
+		<Row class='gap-1 lg:gap-2 lg:p-5 p-3 rounded-lg text-shadow-primary-neutral font-decorative'>
+			<Column
+				mainAxisAlignment='center'
+				crossAxisAlignment='center'
+				class='w-12 lg:w-20 gap-2'
+			>
+				<span
+					class='text-3xl time-value'
+					data-unit='days'
+					>00</span
+				>
+				<span class='text-sm lg:text-sm font-primary'>DÍAS</span>
+			</Column>
+			:
+			<Column
+				mainAxisAlignment='center'
+				crossAxisAlignment='center'
+				class='w-12 lg:w-20 gap-2'
+			>
+				<span
+					class='text-3xl time-value'
+					data-unit='hours'
+					>00</span
+				>
+				<span class='text-sm lg:text-sm font-primary'>HORAS</span>
+			</Column>
+			:
+			<Column
+				mainAxisAlignment='center'
+				crossAxisAlignment='center'
+				class='w-12 lg:w-20 gap-2'
+			>
+				<span
+					class='text-3xl time-value'
+					data-unit='minutes'
+					>00</span
+				>
+				<span class='text-sm lg:text-sm font-primary'>MIN.</span>
+			</Column>
+			:
+			<Column
+				mainAxisAlignment='center'
+				crossAxisAlignment='center'
+				class='w-12 lg:w-20 gap-2'
+			>
+				<span
+					class='text-3xl time-value'
+					data-unit='seconds'
+					>00</span
+				>
+				<span class='text-sm lg:text-sm font-primary'>SEG.</span>
+			</Column>
+		</Row>
+	</Column>
+</Column>
+
+<script>
+	function initTimer(element: HTMLElement) {
+		const anioStr = element.dataset.anio;
+		const mesStr = element.dataset.mes;
+		const diaStr = element.dataset.dia;
+
+		if (!anioStr || !mesStr || !diaStr) return;
+
+		const anio = parseInt(anioStr);
+		const mes = parseInt(mesStr);
+		const dia = parseInt(diaStr);
+
+		// Month is 0-indexed in Date constructor, but usually passed as 1-12.
+		const fechaFinal = new Date(anio, mes - 1, dia, 0, 0, 0).getTime();
+
+		const daysEl = element.querySelector('[data-unit="days"]');
+		const hoursEl = element.querySelector('[data-unit="hours"]');
+		const minutesEl = element.querySelector('[data-unit="minutes"]');
+		const secondsEl = element.querySelector('[data-unit="seconds"]');
+
+		const updateTimer = () => {
+			const now = new Date().getTime();
+			const distance = fechaFinal - now;
+
+			if (distance < 0) {
+				if (daysEl) daysEl.textContent = "00";
+				if (hoursEl) hoursEl.textContent = "00";
+				if (minutesEl) minutesEl.textContent = "00";
+				if (secondsEl) secondsEl.textContent = "00";
+				return;
+			}
+
+			const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			const pad = (n: number) => n.toString().padStart(2, "0");
+
+			if (daysEl) daysEl.textContent = pad(days);
+			if (hoursEl) hoursEl.textContent = pad(hours);
+			if (minutesEl) minutesEl.textContent = pad(minutes);
+			if (secondsEl) secondsEl.textContent = pad(seconds);
+		};
+
+		updateTimer();
+		setInterval(updateTimer, 1000);
+	}
+
+	// Initialize for all instances
+	const timers = document.querySelectorAll<HTMLElement>(".time-counter");
+	timers.forEach(initTimer);
+</script>

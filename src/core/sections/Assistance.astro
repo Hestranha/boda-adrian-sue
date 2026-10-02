@@ -1,0 +1,40 @@
+---
+import Column from "../components/Column.astro";
+import AssistanceForm from "../../components/AssistanceForm";
+
+interface AsistenciaInfo {
+	formUrl: string;
+	field_nombre: string;
+	field_celular: string;
+	field_confirmacion: string;
+	field_mensaje: string;
+}
+
+interface MusicaInfo {
+	formUrl: string;
+	field_nombre_musica: string;
+	field_nombre_asistente: string;
+}
+
+interface Props {
+	asistencia: AsistenciaInfo;
+	musica: MusicaInfo;
+	mensajeAsistencia: string;
+	pases: number;
+}
+
+const { asistencia, musica, mensajeAsistencia, pases } = Astro.props;
+---
+
+<Column
+	class='lg:bg-[url(/backgrounds/assistance-desktop.webp)] lg:bg-no-repeat lg:bg-cover lg:bg-bottom-right font-primary'
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+>
+	<AssistanceForm
+		client:visible
+		asistencia={asistencia}
+		mensajeAsistencia={mensajeAsistencia}
+		pases={pases}
+	/>
+</Column>

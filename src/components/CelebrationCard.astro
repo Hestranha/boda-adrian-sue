@@ -1,0 +1,41 @@
+---
+import Button from "../core/components/Button.astro";
+import Column from "../core/components/Column.astro";
+import Carrousel from "./Carrousel.astro";
+
+interface Props {
+	title: string;
+	hora: string;
+	nombre: string;
+	direccion: string;
+	mapaHref: string;
+	imagen: string[];
+}
+
+const { title, hora, nombre, direccion, mapaHref, imagen } = Astro.props;
+---
+
+<Column
+	crossAxisAlignment='center'
+	class='gap-7 w-4/5 lg:w-full'
+	data-sal='slide-up'
+	data-sal-duration='800'
+>
+	<Carrousel images={imagen} />
+	<Column
+		crossAxisAlignment='center'
+		mainAxisAlignment='center'
+		class='lg:text-xl gap-2 lg:gap-3 w-full font-primary text-primary-neutral'
+	>
+		<h2 class='font-display text-xl lg:text-3xl font-semibold text-primary'>{title}</h2>
+		<span class='font-primary'>{hora}</span>
+		<span class='font-semibold uppercase text-primary'>{nombre}</span>
+		<span class='text-primary-neutral'>{direccion}</span>
+		<Button
+			href={mapaHref}
+			class='mt-2 w-4/5 lg:w-full'
+			label='Ver ubicación'
+			variant='primary'
+		/>
+	</Column>
+</Column>

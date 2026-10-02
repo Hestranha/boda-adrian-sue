@@ -1,0 +1,38 @@
+---
+interface Props {
+	id: string;
+	name: string;
+	placeholder?: string;
+	value?: string;
+	isValid?: boolean;
+	maxLength?: number;
+	numeric?: boolean;
+}
+
+const { id, name, placeholder = "", value = "", isValid = true, maxLength, numeric } = Astro.props;
+---
+
+<input
+	id={id}
+	name={name}
+	type='text'
+	placeholder={placeholder}
+	value={value}
+	autocomplete='off'
+	data-numeric={numeric}
+	maxlength={maxLength}
+	class:list={[
+		`w-full border py-1.5 px-4 hover:bg-input-hover hover:border-input-border-focus text-sm rounded-md focus:outline-none focus:bg-input-bg placeholder-primary focus:border-input-border-focus`,
+		isValid ? "bg-input-bg border-transparent" : "bg-status-error-bg border-status-error",
+	]}
+/>
+
+<script>
+	// Global delegation for numeric inputs to avoid attaching listeners to every input individually if generated dynamically
+	document.addEventListener("input", (e) => {
+		const target = e.target as HTMLInputElement;
+		if (target && target.matches("input[data-numeric]")) {
+			target.value = target.value.replace(/\D/g, "");
+		}
+	});
+</script>

@@ -1,0 +1,320 @@
+---
+import Column from "../components/Column.astro";
+import Row from "../components/Row.astro";
+
+interface Props {
+	pases?: number;
+	nombreNovia: string;
+	nombreNovio: string;
+}
+
+const { pases = 1, nombreNovia, nombreNovio } = Astro.props;
+---
+
+<div id='modal-audio-container'>
+	<!-- Overlay -->
+	<Column
+		id='modal-overlay'
+		class="fixed top-0 w-full h-svh bg-white text-primary z-60 m-0 max-w-none p-0 max-lg:px-2 bg-[url('/backgrounds/hero-countdown-mobile.webp')] lg:bg-[url('/backgrounds/hero-presentation-mobile.webp')] bg-no-repeat bg-cover bg-bottom-left gap-4 pointer-events-none modal-intro"
+		mainAxisAlignment='center'
+		crossAxisAlignment='center'
+	>
+		<Column
+			class='gap-2 py-2 relative z-10'
+			mainAxisAlignment='center'
+			crossAxisAlignment='center'
+		>
+			<span class='text-base lg:text-xl text-center tracking-widest py-1.5 font-primary'>
+				¡Bienvenidos a la invitación
+				<br class='sm:hidden' /> de nuestra boda!
+			</span>
+			<h1 class='relative pb-3 lg:pb-5 text-2xl lg:text-5xl flex flex-col text-center gap-3 font-semibold font-display'>
+				<span class='cinzel-decorative-custom'>
+					{nombreNovio} y {nombreNovia}
+				</span>
+			</h1>
+		</Column>
+
+		<div class='relative w-62.5 lg:w-95 z-10'>
+			<img
+				class='w-62.5 lg:w-95'
+				src='/images/hero/envelope-open.png'
+				alt='sobre'
+			/>
+			<button
+				id='start-button'
+				class='absolute z-10 w-15 lg:w-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer border-none bg-transparent p-0'
+			>
+				<img
+					class='w-15 lg:w-20'
+					src='/images/hero/envelope-seal.png'
+					alt='sobre'
+				/>
+			</button>
+		</div>
+		<span class='text-base lg:text-xl -mt-4 text-end w-62.5 lg:w-95 font-primary z-10'>Haga click aquí</span>
+
+		<Column
+			class='gap-3 mt-5 text-sm lg:text-base font-primary z-10'
+			mainAxisAlignment='center'
+			crossAxisAlignment='center'
+		>
+			Hemos reservado
+			<Row class='gap-5'>
+				{
+					Array.from({ length: 5 }, (_, index) => (
+						<Column
+							mainAxisAlignment='center'
+							crossAxisAlignment='center'
+						>
+							<span>{index + 1}</span>
+							<div class={`w-7 h-7 lg:w-10 lg:h-10 rounded-full border border-brand-green ${index < pases ? "bg-brand-green" : ""}`} />
+						</Column>
+					))
+				}
+			</Row>
+			Lugares en tu honor
+		</Column>
+	</Column>
+
+	<section
+		id='music-controls'
+		class='fixed top-4 right-4 z-40 text-primary font-primary hidden'
+	>
+		<div
+			id='toggle-audio-btn'
+			class='relative cursor-pointer flex flex-col items-center justify-center gap-0.5'
+		>
+			<div
+				id='icon-play'
+				class='hidden items-center justify-center w-14 h-14 bg-primary-neutral/10 rounded-full p-2'
+			>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					viewBox='0 0 24 24'
+					fill='currentColor'
+					class='icon icon-tabler icons-tabler-filled icon-tabler-player-play w-8 h-8'
+					><path
+						stroke='none'
+						d='M0 0h24v24H0z'
+						fill='none'
+					></path><path d='M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z'></path></svg
+				>
+			</div>
+			<div
+				id='icon-pause'
+				class='hidden items-center justify-center w-14 h-14 bg-primary-neutral/10 rounded-full p-2'
+			>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					viewBox='0 0 24 24'
+					fill='currentColor'
+					class='icon icon-tabler icons-tabler-filled icon-tabler-player-pause w-8 h-8'
+					><path
+						stroke='none'
+						d='M0 0h24v24H0z'
+						fill='none'
+					></path><path d='M9 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z'></path><path
+						d='M17 4h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2z'></path></svg
+				>
+			</div>
+		</div>
+	</section>
+
+	<audio
+		id='bg-audio'
+		loop
+	>
+		<source
+			src='/audio/music.mp3'
+			type='audio/mpeg'
+		/>
+	</audio>
+</div>
+
+<style>
+	.modal-intro {
+		transition:
+			opacity 0.7s ease,
+			translate 1s ease;
+		opacity: 0;
+		translate: 0px -100px;
+	}
+
+	.modal-intro.is-visible {
+		opacity: 1;
+		translate: 0px 0px;
+	}
+
+	@keyframes drop-note {
+		0% {
+			opacity: 0;
+			transform: translate(-50%, 0%) scale(0.5);
+		}
+		20% {
+			opacity: 1;
+			transform: translate(-50%, 150%) scale(0.8);
+		}
+		75% {
+			transform: translate(-50%, 450%) scale(0.75);
+		}
+		100% {
+			opacity: 0;
+			transform: translate(-50%, 600%) scale(0.5);
+		}
+	}
+
+	:global(.music-note) {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 14px;
+		height: 14px;
+		pointer-events: none;
+		animation: drop-note 2.5s linear forwards;
+		z-index: -1;
+		color: currentColor;
+	}
+</style>
+
+<script>
+	const overlay = document.getElementById("modal-overlay");
+	const startBtn = document.getElementById("start-button");
+	const musicControls = document.getElementById("music-controls");
+	const toggleBtn = document.getElementById("toggle-audio-btn");
+	const iconPlay = document.getElementById("icon-play");
+	const iconPause = document.getElementById("icon-pause");
+	const audio = document.getElementById("bg-audio") as HTMLAudioElement;
+
+	let isPlaying = false;
+	let noteInterval: any;
+
+	const NOTE_SVG = `
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="24" height="24" viewBox="0 0 512.000000 512.000000"
+ preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+fill="currentColor" stroke="none">
+<path d="M2472 5099 c-47 -24 -83 -66 -101 -118 -8 -25 -11 -506 -11 -1798 0
+-971 -3 -1763 -7 -1761 -5 2 -30 15 -58 29 -148 79 -335 121 -529 121 -623 -1
+-1082 -454 -957 -944 73 -286 345 -519 700 -599 123 -28 312 -35 436 -16 435
+67 754 342 805 693 6 43 10 509 10 1222 0 633 2 1152 5 1152 22 0 217 -103
+299 -157 292 -194 497 -485 586 -833 l21 -82 -50 -68 c-59 -81 -66 -95 -75
+-139 -21 -111 75 -221 193 -221 97 0 139 34 253 204 254 378 385 900 323 1284
+-29 180 -107 378 -211 534 -61 91 -203 239 -313 327 -47 38 -174 128 -281 202
+-345 235 -443 318 -559 473 -131 174 -172 249 -201 364 -21 82 -109 151 -195
+152 -22 0 -59 -10 -83 -21z"/>
+</g>
+</svg>
+	`;
+
+	document.body.style.overflow = "hidden";
+
+	setTimeout(() => {
+		if (overlay) {
+			overlay.classList.add("is-visible");
+			overlay.classList.remove("pointer-events-none");
+		}
+	}, 100);
+
+	function startExperience() {
+		document.body.style.overflow = "auto";
+
+		if (audio) {
+			audio.volume = 0.5;
+			audio
+				.play()
+				.then(() => {
+					isPlaying = true;
+					updateMusicUI();
+				})
+				.catch((e) => {
+					console.warn("Autoplay prevented", e);
+					isPlaying = false;
+					updateMusicUI();
+				});
+		}
+
+		if (overlay) {
+			overlay.classList.remove("is-visible");
+			overlay.classList.add("pointer-events-none");
+			setTimeout(() => {
+				overlay.style.display = "none";
+			}, 1000);
+		}
+
+		if (musicControls) {
+			musicControls.classList.remove("hidden");
+		}
+	}
+
+	function toggleAudio() {
+		if (!audio) return;
+
+		if (isPlaying) {
+			audio.pause();
+			isPlaying = false;
+		} else {
+			audio.play();
+			isPlaying = true;
+		}
+		updateMusicUI();
+	}
+
+	function spawnNote() {
+		if (!toggleBtn) return;
+		const note = document.createElement("div");
+		note.classList.add("music-note");
+
+		const randomLeft = Math.floor(Math.random() * 60) + 20;
+		note.style.left = `${randomLeft}%`;
+
+		note.innerHTML = NOTE_SVG;
+		toggleBtn.appendChild(note);
+
+		setTimeout(() => {
+			note.remove();
+		}, 2500);
+	}
+
+	function updateMusicUI() {
+		if (isPlaying) {
+			if (iconPause) {
+				iconPause.classList.remove("hidden");
+				iconPause.classList.add("flex");
+			}
+			if (iconPlay) {
+				iconPlay.classList.add("hidden");
+				iconPlay.classList.remove("flex");
+			}
+
+			if (!noteInterval) {
+				spawnNote();
+				noteInterval = setInterval(spawnNote, 1400);
+			}
+		} else {
+			if (iconPause) {
+				iconPause.classList.add("hidden");
+				iconPause.classList.remove("flex");
+			}
+			if (iconPlay) {
+				iconPlay.classList.remove("hidden");
+				iconPlay.classList.add("flex");
+			}
+
+			// Stop spawning notes
+			if (noteInterval) {
+				clearInterval(noteInterval);
+				noteInterval = undefined;
+			}
+		}
+	}
+
+	if (startBtn) {
+		startBtn.addEventListener("click", startExperience);
+	}
+
+	if (toggleBtn) {
+		toggleBtn.addEventListener("click", toggleAudio);
+	}
+</script>

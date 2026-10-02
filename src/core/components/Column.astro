@@ -1,0 +1,35 @@
+---
+interface Props {
+	mainAxisAlignment?: "start" | "center" | "end" | "between" | "around" | "evenly";
+	crossAxisAlignment?: "start" | "center" | "end" | "baseline" | "stretch";
+	flexible?: boolean;
+	class?: string;
+	[key: string]: any;
+}
+
+const { mainAxisAlignment = "start", crossAxisAlignment = "stretch", flexible = false, class: className, ...rest } = Astro.props;
+
+const justifyMap: Record<string, string> = {
+	start: "justify-start",
+	center: "justify-center",
+	end: "justify-end",
+	between: "justify-between",
+	around: "justify-around",
+	evenly: "justify-evenly",
+};
+
+const alignMap: Record<string, string> = {
+	start: "items-start",
+	center: "items-center",
+	end: "items-end",
+	baseline: "items-baseline",
+	stretch: "items-stretch",
+};
+---
+
+<div
+	class:list={["flex flex-col", justifyMap[mainAxisAlignment], alignMap[crossAxisAlignment], { "flex-1": flexible }, className]}
+	{...rest}
+>
+	<slot />
+</div>

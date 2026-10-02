@@ -1,0 +1,36 @@
+---
+import Column from "../components/Column.astro";
+import WishingWellForm from "../../components/WishingWellForm";
+
+interface BuzonDeseosInfo {
+	formUrl: string;
+	field_nombre: string;
+	field_mensaje: string;
+}
+
+interface Props {
+	buzonDeseos: BuzonDeseosInfo;
+}
+
+const { buzonDeseos } = Astro.props;
+---
+
+<Column
+	class='max-lg:bg-[url(/backgrounds/assistance-mobile.webp)] bg-no-repeat bg-cover bg-top-left py-7 gap-4 w-full text-center'
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+	data-sal='slide-up'
+	data-sal-duration='800'
+>
+	<h2 class='font-display text-2xl lg:text-4xl text-primary font-semibold'>Buzón de deseos</h2>
+	<p class='text-sm lg:text-base font-primary text-primary-neutral w-[80%] lg:w-[600px] mx-auto leading-relaxed'>
+		Nos encantaría leer tus buenos deseos. <br/>¡Déjanos un mensaje que recordaremos por siempre!
+	</p>
+	
+	<WishingWellForm 
+		client:visible 
+		formUrl={buzonDeseos.formUrl}
+		field_nombre={buzonDeseos.field_nombre}
+		field_mensaje={buzonDeseos.field_mensaje}
+	/>
+</Column>

@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+dialog.modal-component::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  transition:
+    display 0.7s allow-discrete,
+    overlay 0.7s allow-discrete,
+    background-color 0.7s;
+}
+
+dialog.modal-component[open]::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@starting-style {
+  dialog.modal-component[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+dialog.modal-component {
+  transition:
+    display 0.7s ease allow-discrete,
+    overlay 0.7s ease allow-discrete,
+    opacity 0.7s ease,
+    background-color 0.7s,
+    translate 1s ease;
+  opacity: 0;
+  translate: 0px -100px;
+
+  &[open] {
+    opacity: 1;
+    translate: 0px 0px;
+    transition:
+      opacity 0.7s ease,
+      background-color 0.7s,
+      translate 1s ease;
+
+    @starting-style {
+      opacity: 0;
+      translate: 0px -100px;
+    }
+  }
+}

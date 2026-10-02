@@ -1,0 +1,78 @@
+---
+import Column from "../components/Column.astro";
+
+interface Padrino {
+	titulo: string;
+	nombres: string[];
+}
+
+interface Props {
+	padresNovia: string[];
+	padresNovio: string[];
+	padrinos: Padrino[];
+}
+
+const { padresNovia, padresNovio, padrinos } = Astro.props;
+---
+
+<Column
+	crossAxisAlignment='center'
+	mainAxisAlignment='center'
+	class='bg-[url("/backgrounds/honor-mobile.webp"),url("/backgrounds/celebration-ceremony-mobile.webp")] bg-size-[10rem,40rem] bg-position-[left_top,left_bottom] lg:bg-[url("/backgrounds/honor-desktop.webp")] lg:bg-cover lg:bg-top-left bg-no-repeat py-6 lg:py-12 text-primary font-primary'
+>
+	<Column
+		crossAxisAlignment='center'
+		class='text-center gap-10'
+	>
+		<Column
+			class='gap-7'
+			crossAxisAlignment='center'
+			mainAxisAlignment='center'
+			data-sal='slide-up'
+			data-sal-duration='800'
+		>
+			<h2 class='font-semibold font-display w-full text-2xl lg:text-3xl text-primary'>
+				Con la bendición de <br />
+				nuestros padres
+			</h2>
+			<Column class='gap-7 text-primary-neutral'>
+				<Column class='gap-2'>
+					<span class='font-bold text-sm lg:text-base uppercase'>Padres del novio</span>
+					<Column class='text-sm lg:text-base tracking-wider gap-1'>
+						{padresNovio.map((nombre) => <span>{nombre}</span>)}
+					</Column>
+				</Column>
+				<Column class='gap-2'>
+					<span class='font-bold text-sm lg:text-base uppercase'>Padres de la novia</span>
+					<Column class='text-sm lg:text-base tracking-wider gap-1'>
+						{padresNovia.map((nombre) => <span>{nombre}</span>)}
+					</Column>
+				</Column>
+			</Column>
+		</Column>
+
+		<Column
+			class='gap-7'
+			crossAxisAlignment='center'
+			mainAxisAlignment='center'
+			data-sal='slide-up'
+			data-sal-duration='800'
+		>
+			<h2 class='font-semibold font-display text-2xl lg:text-3xl text-primary'>
+				Junto a nuestros <br />
+				padrinos
+			</h2>
+			<Column class='gap-7 text-primary-neutral'>
+				{padrinos.map((grupo) => (
+					<Column class='gap-2'>
+						<span class='font-bold text-sm lg:text-base uppercase'>{grupo.titulo}</span>
+						<Column class='text-sm lg:text-base tracking-wider gap-1'>
+							{grupo.nombres.map((nombre) => <span>{nombre}</span>)}
+						</Column>
+					</Column>
+				))}
+			</Column>
+		</Column>
+	</Column>
+</Column>
+

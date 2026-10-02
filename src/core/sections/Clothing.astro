@@ -1,0 +1,105 @@
+---
+import Column from "../components/Column.astro";
+import Row from "../components/Row.astro";
+
+interface Seccion {
+	titulo: string;
+	subtitulo: string;
+	icono: string;
+	descripcion: string;
+}
+
+interface VestimentaData {
+	titulo: string;
+	descripcion: string;
+	imagen: string;
+	guiaColores: string[];
+	secciones: Seccion[];
+}
+
+interface Props {
+	vestimenta: VestimentaData;
+}
+
+const { vestimenta } = Astro.props;
+---
+
+<Column
+	crossAxisAlignment='center'
+	mainAxisAlignment='center'
+	class='celebration py-7 gap-2 lg:gap-4 w-full text-center max-lg:bg-[url(/backgrounds/assistance-mobile.webp)] bg-no-repeat bg-cover max-lg:bg-top-left bg-[url(./backgrounds/clothing-desktop.webp)] bg-top-right'
+>
+	<img
+		class='h-17.5 lg:h-20'
+		src={vestimenta.imagen}
+		alt='clothing'
+		data-sal='slide-up'
+		data-sal-duration='800'
+	/>
+	<h2
+		data-sal='slide-up'
+		data-sal-duration='800'
+		class='font-display text-2xl lg:text-4xl text-primary font-semibold'
+	>
+		{vestimenta.titulo}
+	</h2>
+
+	<Column
+		mainAxisAlignment='center'
+		crossAxisAlignment='center'
+		class='gap-2 lg:gap-4 lg:w-1/2'
+		data-sal='slide-up'
+		data-sal-duration='800'
+	>
+		{vestimenta.guiaColores.length > 0 && (
+			<Column class='gap-1 lg:gap-2'>
+				<span class='text-sm text-center lg:text-base font-primary text-primary'>Guía de colores:</span>
+				<Row class='gap-1 lg:gap-2'>
+					{
+						vestimenta.guiaColores.map((color) => (
+							<span
+								class='h-7 w-7 lg:h-7 lg:w-7 rounded-full'
+								style={`background-color: ${color}`}
+							/>
+						))
+					}
+				</Row>
+			</Column>
+		)}
+
+		{vestimenta.secciones.length > 0 ? (
+			<Row class='px-5 gap-3 w-full font-primary mt-2'>
+				{
+					vestimenta.secciones.map((seccion, index) => (
+						<>
+							<Column
+								class='w-1/2 gap-2'
+								crossAxisAlignment='center'
+							>
+								<div class='text-primary-neutral'>
+									<h2 class='text-sm lg:text-base uppercase font-bold font-primary'>{seccion.titulo}</h2>
+									<h2 class='text-sm lg:text-base uppercase font-bold font-primary'>{seccion.subtitulo}</h2>
+								</div>
+								<img
+									class='w-12 h-12'
+									src={seccion.icono}
+									alt={seccion.titulo}
+								/>
+								<p
+									class='text-sm lg:text-base'
+									set:html={seccion.descripcion}
+								/>
+							</Column>
+							{index < vestimenta.secciones.length - 1 && <div class='border-l border-primary w-px self-stretch' />}
+						</>
+					))
+				}
+			</Row>
+		) : (
+			<p class='font-primary text-xl lg:text-2xl uppercase '>
+				{vestimenta.descripcion}
+			</p>
+		)}
+	</Column>
+</Column>
+

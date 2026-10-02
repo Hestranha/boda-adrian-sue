@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StartBoda from "./sections/StartBoda.astro";
+import Phrase from "./sections/Phrase.astro";
+import Gallery from "./sections/Gallery.astro";
+import Honor from "./sections/Honor.astro";
+import Celebration from "./sections/Celebration.astro";
+import Count from "./sections/Count.astro";
+import Schedule from "./sections/Schedule.astro";
+import Gift from "./sections/Gift.astro";
+import Clothing from "./sections/Clothing.astro";
+import KidsNotice from "./sections/KidsNotice.astro";
+import Assistance from "./sections/Assistance.astro";
+import Instagram from "./sections/Instagram.astro";
+import Footer from "./sections/Footer.astro";
+import ModalAudio from "./sections/ModalAudio.astro";
+import { EVENT_DATA } from "../data/event";
+
+interface Props {
+	pases: number;
+}
+
+const { pases } = Astro.props;
+---
+
+<Layout title={`${EVENT_DATA.novio} & ${EVENT_DATA.novia} | Nuestra Boda`}>
+	<main class='overflow-hidden'>
+		<ModalAudio
+			pases={pases}
+			nombreNovia={EVENT_DATA.novia}
+			nombreNovio={EVENT_DATA.novio}
+		/>
+		<StartBoda
+			nombreNovia={EVENT_DATA.novia}
+			nombreNovio={EVENT_DATA.novio}
+			fecha={EVENT_DATA.fecha}
+			opacity={EVENT_DATA.opacity}
+			fechaBodaTimer={EVENT_DATA.fechaBodaTimer}
+		/>
+
+		<Phrase creadorFrase={EVENT_DATA.creadorFrase}>
+			&quot;{EVENT_DATA.frase}&quot;
+		</Phrase>
+
+
+
+		<Gallery imagenes={EVENT_DATA.imagenes} />
+
+		<Honor
+			padresNovia={EVENT_DATA.padresNovia}
+			padresNovio={EVENT_DATA.padresNovio}
+			padrinos={EVENT_DATA.padrinos}
+		/>
+
+		<Celebration
+			ceremonia={EVENT_DATA.ceremonia}
+			recepcion={EVENT_DATA.recepcion}
+		/>
+
+		<Count pases={pases} />
+
+		<Schedule events={EVENT_DATA.scheduleEvents} />
+
+		<Gift sugerencias={EVENT_DATA.sugerencias} />
+
+		<KidsNotice
+			titulo="Solo adultos"
+			mensaje={EVENT_DATA.mensajeNinos}
+		/>
+
+		<Clothing vestimenta={EVENT_DATA.vestimenta} />
+
+		<Assistance
+			pases={pases}
+			musica={EVENT_DATA.musica}
+			asistencia={EVENT_DATA.asistencia}
+			mensajeAsistencia={EVENT_DATA.mensajeAsistencia}
+		/>
+
+
+		<Instagram />
+
+		<Footer />
+	</main>
+</Layout>

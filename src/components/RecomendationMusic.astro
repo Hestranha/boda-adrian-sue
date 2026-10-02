@@ -1,0 +1,39 @@
+---
+import Column from "../core/components/Column.astro";
+import MusicForm from "./MusicForm.tsx";
+
+interface Props {
+	googleFormsUrl: string;
+	googleFormsAsistenteField: string;
+	googleFormsMusicaField: string;
+}
+
+const { googleFormsUrl, googleFormsAsistenteField, googleFormsMusicaField } = Astro.props;
+---
+
+<Column
+	class='max-lg:bg-[url(/backgrounds/gift-mobile.webp)] bg-no-repeat bg-cover bg-top-right gap-5 w-full py-7 font-primary'
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+>
+	<h2
+		class='font-display text-2xl lg:text-4xl text-primary font-semibold'
+		data-sal='slide-up'
+		data-sal-duration='800'
+	>
+		Recomienda tu música
+	</h2>
+	<p
+		class='flex flex-col max-lg:text-sm w-4/5 lg:w-120 text-center text-primary-neutral'
+		data-sal='slide-up'
+		data-sal-duration='800'
+	>
+		¿Cuáles son esas canciones que no pueden faltar en nuestra boda? <br /> Comparte tus favoritas con nosotros.
+	</p>
+	<MusicForm
+		client:visible
+		googleFormsUrl={googleFormsUrl}
+		googleFormsAsistenteField={googleFormsAsistenteField}
+		googleFormsMusicaField={googleFormsMusicaField}
+	/>
+</Column>

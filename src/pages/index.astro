@@ -1,0 +1,9 @@
+---
+import App from "../core/App.astro";
+
+const id = Astro.url.searchParams.get("id") || "1";
+const rawPases = parseInt(id) || 1;
+const pases = Math.min(Math.max(rawPases, 1), 5);
+---
+
+<App pases={pases} />

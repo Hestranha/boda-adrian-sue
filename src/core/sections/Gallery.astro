@@ -1,0 +1,80 @@
+---
+import "@splidejs/splide/css";
+import Column from "../components/Column.astro";
+
+interface Props {
+	imagenes: string[];
+}
+
+const { imagenes } = Astro.props;
+---
+
+<Column
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+	class='bg-[url("/backgrounds/gallery-mobile.webp")] lg:bg-[url("/backgrounds/gallery-desktop.webp")] bg-cover bg-top-right bg-no-repeat py-12 w-full overflow-hidden gap-8'
+	data-sal='slide-up'
+	data-sal-duration='800'
+>
+	<Column
+		crossAxisAlignment='center'
+		class='text-center gap-1 lg:gap-2'
+	>
+		<p class='font-display text-2xl lg:text-4xl text-primary font-semibold'>Nuestros momentos</p>
+		<span class='text-sm lg:text-base font-primary'>Compartimos con ustedes nuestro amor</span>
+	</Column>
+
+	<section
+		class='splide w-full lg:w-4/5'
+		aria-label='Gallery'
+	>
+		<div class='splide__track'>
+			<ul class='splide__list'>
+				{
+					imagenes.map((imagen, i) => (
+						<li class='splide__slide'>
+							<div class='relative bg-white lg:p-8 lg:pb-24 shadow-md mb-0.5 p-4 pb-12'>
+								<img
+									src={imagen}
+									alt={`imagen-${i}`}
+									class='w-full aspect-square object-cover object-center'
+								/>
+								<img
+									class='absolute bottom-14 lg:bottom-32 left-1/2 -translate-x-1/2 transform w-10 lg:w-20 z-30'
+									src='/icons/brand-initials.svg'
+									alt='logo-iniciales'
+								/>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</Column>
+
+<script>
+	import Splide from "@splidejs/splide";
+
+	document.addEventListener("DOMContentLoaded", () => {
+		new Splide(".splide", {
+			type: "loop",
+			focus: "center",
+			padding: "20%",
+			gap: "1rem",
+			autoplay: true,
+			interval: 3000,
+			speed: 2000,
+			pagination: false,
+			arrows: false,
+			mediaQuery: "min",
+			breakpoints: {
+				768: {
+					perPage: 2,
+					padding: "5%",
+					focus: 0,
+				},
+			},
+		}).mount();
+	});
+</script>

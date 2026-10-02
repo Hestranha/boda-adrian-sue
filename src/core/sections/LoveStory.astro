@@ -1,0 +1,28 @@
+---
+import Column from "../components/Column.astro";
+
+interface Props {
+	historiaAmor?: string;
+}
+
+const { historiaAmor } = Astro.props;
+---
+
+<Column
+	class='max-lg:bg-[url(/backgrounds/assistance-mobile.webp)] lg:bg-[url("/backgrounds/celebration-desktop.webp")]  bg-no-repeat bg-cover bg-top-left py-12 lg:py-24 w-full overflow-hidden gap-6 lg:gap-8'
+	mainAxisAlignment='center'
+	crossAxisAlignment='center'
+	data-sal='slide-up'
+	data-sal-duration='800'
+>
+	<Column
+		crossAxisAlignment='center'
+		class='text-center gap-4 lg:gap-6'
+	>
+		<img src="/icons/love-story.svg" alt="Historia de amor" class="w-16 h-16 lg:w-24 lg:h-24" />
+		<h2 class='font-display text-2xl lg:text-4xl text-primary font-semibold'>Historia de amor</h2>
+		<p class='text-sm lg:text-base font-primary text-primary-neutral w-[80%] lg:w-[600px] mx-auto leading-relaxed'>
+			{historiaAmor || "Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que quieres los hace inolvidables. Nuestra historia comenzó con una mirada y hoy nos lleva al altar."}
+		</p>
+	</Column>
+</Column>

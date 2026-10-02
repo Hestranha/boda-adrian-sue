@@ -1,0 +1,65 @@
+---
+import "../styles/global.css";
+import "sal.js/dist/sal.css";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title = 'Deysi & Jimmy | Nuestra Boda', description = "Invitación de Boda" } = Astro.props;
+---
+
+<!doctype html>
+<html lang='es' translate='no'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta
+			name='description'
+			content={description}
+		/>
+		<meta
+			name='viewport'
+			content='width=device-width'
+		/>
+		<link
+			rel='icon'
+			type='image/svg+xml'
+			href='/favicon.svg'
+		/>
+		<meta
+			name='generator'
+			content={Astro.generator}
+		/>
+		<title>{title}</title>
+
+		<link
+			rel='preload'
+			href='/fonts/CinzelDecorative-Regular.ttf'
+			as='font'
+			type='font/ttf'
+			crossorigin
+		/>
+		<link
+			rel='preload'
+			href='/fonts/RIVERFLOWS.otf'
+			as='font'
+			type='font/otf'
+			crossorigin
+		/>
+		<link
+			rel='preload'
+			href='/fonts/Poppins-Regular.ttf'
+			as='font'
+			type='font/ttf'
+			crossorigin
+		/>
+	</head>
+	<body class='bg-white text-primary-neutral'>
+		<slot />
+		<script>
+			import sal from "sal.js";
+			sal();
+		</script>
+	</body>
+</html>

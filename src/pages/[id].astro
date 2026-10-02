@@ -1,0 +1,15 @@
+---
+import App from "../core/App.astro";
+
+export function getStaticPaths() {
+	return Array.from({ length: 50 }, (_, i) => ({
+		params: { id: (i + 1).toString() },
+	}));
+}
+
+const { id } = Astro.params;
+const rawPases = parseInt(id!) || 1;
+const pases = Math.min(Math.max(rawPases, 1), 5);
+---
+
+<App pases={pases} />

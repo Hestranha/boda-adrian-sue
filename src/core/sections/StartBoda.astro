@@ -1,0 +1,67 @@
+---
+import Column from "../components/Column.astro";
+import Row from "../components/Row.astro";
+import Time from "../../components/Time.astro";
+
+interface Props {
+	nombreNovia: string;
+	nombreNovio: string;
+	fecha: string;
+	fechaBodaTimer: {
+		anioFinal: number;
+		mesFinal: number;
+		diaFinal: number;
+		zonaEvento: string;
+	};
+	opacity: string;
+}
+
+const { nombreNovia, nombreNovio, fecha, fechaBodaTimer, opacity } = Astro.props;
+---
+
+<div class='min-h-svh'>
+	<Column
+		mainAxisAlignment='center'
+		crossAxisAlignment='center'
+		class='relative h-[65vh] w-full bg-primary bg-[url("/backgrounds/hero-main-cell.jpeg")] lg:bg-[url("/backgrounds/hero-main-desktop.jpeg")] bg-no-repeat bg-cover bg-center lg:bg-bottom'
+	>
+		<div class={opacity}></div>
+		<Column
+			mainAxisAlignment='end'
+			crossAxisAlignment='center'
+			class='pb-16 h-full w-full gap-8 z-10'
+		>
+			<Column
+				mainAxisAlignment='end'
+				crossAxisAlignment='center'
+				class='animate-spin-slow w-full lg:w-200 gap-4 lg:gap-8'
+				style='filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));'
+			>
+				<img
+					class='w-17.5 lg:w-25'
+					src='/icons/brand-initials.svg'
+				/>
+				<Column
+					crossAxisAlignment='center'
+					class='gap-10'
+				>
+					<h1 class='text-3xl lg:text-5xl font-display text-center text-text-inverted'>
+						<Row class='gap-2 lg:gap-4'>
+							<span>{nombreNovio}</span>
+							<span>&</span>
+							<span class='ml-2 lg:ml-3'>{nombreNovia}</span>
+						</Row>
+						<span class='block text-[1.7rem] lg:text-[2.5rem] font-display tracking-wide mt-2'>{fecha}</span>
+					</h1>
+				</Column>
+			</Column>
+		</Column>
+	</Column>
+	<Column
+		mainAxisAlignment='center'
+		crossAxisAlignment='center'
+		class='h-[35vh] bg-[url("/backgrounds/hero-countdown-mobile.webp")] lg:bg-[url("/backgrounds/hero-countdown-desktop.webp")] bg-no-repeat bg-cover bg-top-left'
+	>
+		<Time fechaBoda={fechaBodaTimer} />
+	</Column>
+</div>
