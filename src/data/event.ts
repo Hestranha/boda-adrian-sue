@@ -25,14 +25,14 @@ export const EVENT_DATA = {
 	ceremonia: {
 		hora: "11:00am",
 		nombre: "Parroquia Señor de los Milagros",
-		direccion: "Av Jorge Chavez, Urbanización Bolognesi",
+		direccion: "Av. Jorge Chavez",
 		mapaHref: "https://maps.app.goo.gl/Gnba8LojkC4Zkqqr8",
 		imagen: ["/images/ceremony/ref-1.jpg", "/images/ceremony/ref-2.jpg"],
 	},
 	recepcion: {
 		hora: "1:30pm",
 		nombre: "Las Palmeras Garden",
-		direccion: "Av Capanique S/N Pocollay (frente a Bodegas Franco)",
+		direccion: "Av. Capanique S/N Pocollay",
 		mapaHref: "https://maps.app.goo.gl/GJdveHg9Lx3mTzik6",
 		imagen: ["/images/reception/ref-1.jpg", "/images/reception/ref-2.png"],
 	},
@@ -44,7 +44,7 @@ export const EVENT_DATA = {
 	mensajeNinos: "Adoramos a sus pequeños, sin embargo este evento está destinado sólo para adultos. ¡Esperamos su comprensión!",
 	sugerencias: {
 		nombre: "",
-		lista_regalos_url: "https://www.noviosfalabella.com.pe/secure/listaRegalos.do",
+		lista_regalos_url: "https://www.noviosfalabella.com.pe/public/inicio.do",
 		lista_regalos_codigo: "738276-06",
 		numero_billetera_digital: "",
 		cci: "",
